@@ -46,12 +46,28 @@ client.connect(err => {
                 res.send(documents);
             })
     })
+    //admin panel
+    // get all volunteer 
+    app.get('/getAllVolunteer', (req, res) => {
+        volunteerCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents);
+            })
+    })
+    //delete specific volunteer 
     app.delete('/CancelEvents/:id', (req, res) => {
         const userId = ObjectID(req.params.id);
 
         volunteerCollection.deleteOne({ _id: userId })
             .then(result => {
                 res.send(result.deletedCount > 0)
+            })
+    })
+    app.post('/addEvents', (req, res) => {
+        const newEvents = req.body;
+        eventsCollections.insertOne(newEvents)
+            .then(result => {
+                res.send(result.insertedCount > 0);
             })
     })
 
