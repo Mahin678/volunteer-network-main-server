@@ -9,7 +9,7 @@ require('dotenv').config();
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
-const port = 4000
+const port = process.env.PORT || 4000;
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.odwvb.mongodb.net/volunteer-network?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
